@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "40632360916",
+    "project_id": "paraiso-a6ec6",
+    "storage_bucket": "paraiso-a6ec6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40632360916:android:7973a40be0c4df48478041",
+        "android_client_info": {
+          "package_name": "com.paraiso.paraiso"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDGK03SNK8p_J_JldKBYDSEazA5HZDg4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
