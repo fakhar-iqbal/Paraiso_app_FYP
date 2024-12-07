@@ -233,6 +233,7 @@ dependencies:
   flutter_spinkit: 
   flutter_animate:
   animated_text_kit:
+  google_maps_flutter: ^2.10.0
 
 
 
