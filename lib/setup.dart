@@ -17,8 +17,8 @@ Docs: https://firebase.flutter.dev/docs/cli/
 
 Future initializePreConfig() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Stripe.publishableKey = "pk_live_51MVrzeFEInIeQ0sUKdZie82qk5TAarvFDB4Jubh3lmnY3hc7iGHzDUVUrGtShz9UFuJeYb7rYfdgEgKeTCCZ3VIs00Qo2gSl1I";
-  // Stripe.publishableKey = "pk_test_51OAzOaBv5r2e0H1dyPNETX31O9rsaIpZLpoRuWnjLWzVbleyjIfG2tdFDOrie18giCmF4jaadcy0n18zsaIbdozU002Tqqb68X";
+  // Stripe.publishableKey = "pk_live_51MVrzeFEInIeQ0sUKdZie82qk5TAarvFDB4Jubh3lmnY3hc7iGHzDUVUrGtShz9UFuJeYb7rYfdgEgKeTCCZ3VIs00Qo2gSl1I";
+  Stripe.publishableKey = "pk_test_51OAzOaBv5r2e0H1dyPNETX31O9rsaIpZLpoRuWnjLWzVbleyjIfG2tdFDOrie18giCmF4jaadcy0n18zsaIbdozU002Tqqb68X";
   await dotenv.load(fileName: "assets/.env");
   setupGetStorage();
   await sharedPrefInit();

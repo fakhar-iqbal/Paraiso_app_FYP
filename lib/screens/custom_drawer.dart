@@ -100,7 +100,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ListTile(
                 title: Text(AppLocalizations.of(context)!.signOut),
                 onTap: () async {
-                  if (authController.user != null && authController.anonymousUser != null) {
+                  if (authController.user != null ) {   //&& authController.anonymousUser != null
                     await authController.logout();
                     if (mounted) {
                       context.pushReplacement(AppRouteConstants.getStartedRoute);

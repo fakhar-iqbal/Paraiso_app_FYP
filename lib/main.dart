@@ -133,7 +133,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Initialize Gemini with your API key
-  Gemini.init(apiKey: 'AIzaSyAL3pMvjx2SxQGlQIpyP86kMUNBVIfNxTU');
+  await Gemini.init(apiKey: 'AIzaSyAL3pMvjx2SxQGlQIpyP86kMUNBVIfNxTU');
+  
   runApp(
     const MyApp(),
   );

@@ -234,6 +234,12 @@ dependencies:
   flutter_animate:
   animated_text_kit:
   google_maps_flutter: ^2.10.0
+  google_generative_ai:
+  path_provider:
+  path:
+  fuzzy: ^0.5.1
+  flutter_polyline_points: ^2.1.0
+  
 
 
 

@@ -357,7 +357,7 @@ class _CheckoutState extends State<Checkout> {
 
     //check user is a stripe customer if not create a stripe customer
     print("test 1");
-    if (data['stripeCustomerID'] == null) {
+    if (data['stripeCustomerID'] == null || data['stripeCustomerID'] == "") {
       print("test 2");
 
       final customerId = await createCustomer(
@@ -950,22 +950,22 @@ class _CheckoutState extends State<Checkout> {
 
       if (isNewMethod) {
         // for real stripe account
-        await Stripe.instance.initPaymentSheet(
-          paymentSheetParameters: SetupPaymentSheetParameters(
-              setupIntentClientSecret: dotenv.env['STRIPE_SECRET'],
-              paymentIntentClientSecret: paymentIntentData!['client_secret'],
-              customFlow: false,
-              merchantDisplayName: "Paraiso"),
-        );
-
-        //for test Stripe Account
         // await Stripe.instance.initPaymentSheet(
         //   paymentSheetParameters: SetupPaymentSheetParameters(
-        //       setupIntentClientSecret: "pk_test_51OAzOaBv5r2e0H1dyPNETX31O9rsaIpZLpoRuWnjLWzVbleyjIfG2tdFDOrie18giCmF4jaadcy0n18zsaIbdozU002Tqqb68X",
-        //       paymentIntentClientSecret:paymentIntentData!['client_secret'],
+        //       setupIntentClientSecret: dotenv.env['STRIPE_SECRET'],
+        //       paymentIntentClientSecret: paymentIntentData!['client_secret'],
         //       customFlow: false,
         //       merchantDisplayName: "Paraiso"),
         // );
+
+        //for test Stripe Account
+        await Stripe.instance.initPaymentSheet(
+          paymentSheetParameters: SetupPaymentSheetParameters(
+              setupIntentClientSecret: "pk_test_51OAzOaBv5r2e0H1dyPNETX31O9rsaIpZLpoRuWnjLWzVbleyjIfG2tdFDOrie18giCmF4jaadcy0n18zsaIbdozU002Tqqb68X",
+              paymentIntentClientSecret:paymentIntentData!['client_secret'],
+              customFlow: false,
+              merchantDisplayName: "Paraiso"),
+        );
 
         final paymentSuccess = await displayPaymentSheet();
         if (paymentSuccess) {
@@ -1105,24 +1105,24 @@ class _CheckoutState extends State<Checkout> {
       }
 
       // for real stripe account
-      var response = await http.post(
-        Uri.parse('https://api.stripe.com/v1/payment_intents'),
-        body: body,
-        headers: {
-          'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET']}',
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      );
-
-      //for test stripe account
       // var response = await http.post(
       //   Uri.parse('https://api.stripe.com/v1/payment_intents'),
       //   body: body,
       //   headers: {
-      //     'Authorization': 'Bearer sk_test_51OAzOaBv5r2e0H1d0DJbmYby7jBSyvYhpFnADcgrSQS0uYT8IcI6jvitt1bkmD8Q1fUMCQLXItb3zEm4xCOyi5E300NNZqaiJO',
+      //     'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET']}',
       //     'Content-Type': 'application/x-www-form-urlencoded',
       //   },
       // );
+
+      //for test stripe account
+      var response = await http.post(
+        Uri.parse('https://api.stripe.com/v1/payment_intents'),
+        body: body,
+        headers: {
+          'Authorization': 'Bearer sk_test_51OAzOaBv5r2e0H1d0DJbmYby7jBSyvYhpFnADcgrSQS0uYT8IcI6jvitt1bkmD8Q1fUMCQLXItb3zEm4xCOyi5E300NNZqaiJO',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      );
 
       if (kDebugMode) {
         print('Create Intent response: ${response.body.toString()}');
@@ -1142,23 +1142,23 @@ class _CheckoutState extends State<Checkout> {
         'email': userEmail,
       };
       // for real
-      var response = await http.post(
-        Uri.parse('https://api.stripe.com/v1/customers'),
-        body: body,
-        headers: {
-          'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET']}',
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      );
-      // for test
       // var response = await http.post(
       //   Uri.parse('https://api.stripe.com/v1/customers'),
       //   body: body,
       //   headers: {
-      //     'Authorization': 'Bearer sk_test_51OAzOaBv5r2e0H1d0DJbmYby7jBSyvYhpFnADcgrSQS0uYT8IcI6jvitt1bkmD8Q1fUMCQLXItb3zEm4xCOyi5E300NNZqaiJO',
+      //     'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET']}',
       //     'Content-Type': 'application/x-www-form-urlencoded',
       //   },
       // );
+      // for test
+      var response = await http.post(
+        Uri.parse('https://api.stripe.com/v1/customers'),
+        body: body,
+        headers: {
+          'Authorization': 'Bearer sk_test_51OAzOaBv5r2e0H1d0DJbmYby7jBSyvYhpFnADcgrSQS0uYT8IcI6jvitt1bkmD8Q1fUMCQLXItb3zEm4xCOyi5E300NNZqaiJO',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      );
       final result = jsonDecode(response.body);
       final customerId = result['id'];
       if (kDebugMode) {
@@ -1176,24 +1176,24 @@ class _CheckoutState extends State<Checkout> {
   Future<dynamic> getPaymentMethod({required String customerId}) async {
     try {
       // for real
-      var response = await http.get(
-        Uri.parse(
-            'https://api.stripe.com/v1/customers/$customerId/payment_methods'),
-        headers: {
-          'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET']}',
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      );
-      // for test
       // var response = await http.get(
-      //   Uri.parse('https://api.stripe.com/v1/customers/$customerId/payment_methods'),
+      //   Uri.parse(
+      //       'https://api.stripe.com/v1/customers/$customerId/payment_methods'),
       //   headers: {
-      //     'Authorization': 'Bearer sk_test_51OAzOaBv5r2e0H1d0DJbmYby7jBSyvYhpFnADcgrSQS0uYT8IcI6jvitt1bkmD8Q1fUMCQLXItb3zEm4xCOyi5E300NNZqaiJO',
+      //     'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET']}',
       //     'Content-Type': 'application/x-www-form-urlencoded',
       //   },
       // );
+      // for test
+      var response = await http.get(
+        Uri.parse('https://api.stripe.com/v1/customers/$customerId/payment_methods'),
+        headers: {
+          'Authorization': 'Bearer sk_test_51OAzOaBv5r2e0H1d0DJbmYby7jBSyvYhpFnADcgrSQS0uYT8IcI6jvitt1bkmD8Q1fUMCQLXItb3zEm4xCOyi5E300NNZqaiJO',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      );
       if (kDebugMode) {
-        // print('Create Customer response 111111111: ${response.body.toString()}');
+        print('Create Customer response 111111111: ${response.body.toString()}');
       }
       return jsonDecode(response.body);
     } catch (err) {

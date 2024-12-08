@@ -229,6 +229,7 @@ import 'package:go_router/go_router.dart';
 import 'package:paraiso/controllers/customer_controller.dart';
 import 'package:paraiso/screens/camera_screen.dart';
 import 'package:paraiso/screens/chatbot.dart';
+import 'package:paraiso/screens/route_ordering_screen.dart';
 import 'package:paraiso/screens/user_profile.dart';
 import 'package:paraiso/widgets/home_chips_row.dart';
 import 'package:paraiso/widgets/nav_bottom_bar.dart';
@@ -410,19 +411,19 @@ class _ScaffoldWithNavState extends State<ScaffoldWithNav> {
         mainAxisSize: MainAxisSize.min, // Adjust height dynamically
         children: [
           FloatingActionButton(
-            heroTag: "cameraButton", // Unique heroTag for each FAB
+            heroTag: "location ", // Unique heroTag for each FAB
             onPressed: () {
               // Add camera navigation logic
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      FoodRecognitionScreen(), // Replace with your screen
+                      RouteOrderingModule(), // Replace with your screen
                 ),
               );
             },
             backgroundColor: Colors.blue,
-            child: const Icon(Icons.camera_alt),
+            child: const Icon(Icons.route_outlined),
           ),
           SizedBox(height: 16.h), // Space between the two buttons
           FloatingActionButton(
