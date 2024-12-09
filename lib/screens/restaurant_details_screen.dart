@@ -958,7 +958,7 @@ class ResFoodTile extends StatelessWidget {
       //       foodItem: foodItem,
       //       addOns: addOns ?? [],
       //     ));
-      if (isAvailable)
+      if (isAvailable) {
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -968,6 +968,7 @@ class ResFoodTile extends StatelessWidget {
                     foodItem: foodItem,
                     restaurantImage: restaurantImage,
                     addOns: addOns ?? [])));
+      }
     });
   }
 }

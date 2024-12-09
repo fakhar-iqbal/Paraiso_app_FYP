@@ -418,7 +418,7 @@ class _ScaffoldWithNavState extends State<ScaffoldWithNav> {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      RouteOrderingModule(), // Replace with your screen
+                      const MainScreen(), // Replace with your screen
                 ),
               );
             },
