@@ -9,16 +9,33 @@ class ImageUploadProvider with ChangeNotifier {
 
   String? get imageUrl => _imageUrl;
 
-  Future<void> uploadImageToFirebase(File? imgPath) async {
-    try {
-      if (imgPath != null) {
-        String imageUrl = await _repo.uploadImageToFirebase(imgPath: imgPath);
+  // Future<void> uploadImageToFirebase(File? imgPath) async {
+  //   try {
+  //     if (imgPath != null) {
+  //       String imageUrl = await _repo.uploadImageToFirebase(imgPath: imgPath);
 
-        _imageUrl = imageUrl;
-        notifyListeners();
-      }
-    } catch (e) {
-      if (kDebugMode) print('Error uploading image: $e');
+  //       _imageUrl = imageUrl;
+  //       notifyListeners();
+  //     }
+  //   } catch (e) {
+  //     if (kDebugMode) print('Error uploading image: $e');
+  //   }
+  // }
+Future<String?> uploadImageToFirebase(File? imgPath) async {
+  try {
+    if (imgPath != null) {
+      // Upload file to Firebase
+      String imageUrl = await _repo.uploadImageToFirebase(imgPath: imgPath);
+
+      _imageUrl = imageUrl; // Save to state
+      notifyListeners();
+      return imageUrl; // Return the URL
     }
+    return null;
+  } catch (e) {
+    if (kDebugMode) print('Error uploading image: $e');
+    return null;
   }
+}
+
 }

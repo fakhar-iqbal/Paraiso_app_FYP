@@ -21,7 +21,12 @@ class RMainView extends StatefulWidget {
 
 class _RMainViewState extends State<RMainView> {
   int _index = 0;
-  final views = [const ROrderView(), const RHomeView(), const RLiveView(), const RAnalysisView()];
+  final views = [
+    const ROrderView(),
+    const RHomeView(),
+    const RLiveView(),
+    const RAnalysisView()
+  ];
 
   late NearbyRestaurantsController _nearbyRestaurantsController;
   late ClientsController _clientsController;
@@ -44,16 +49,20 @@ class _RMainViewState extends State<RMainView> {
   @override
   Widget build(BuildContext context) {
     _authController = Provider.of<AuthController>(context, listen: false);
-    _nearbyRestaurantsController = Provider.of<NearbyRestaurantsController>(context, listen: false);
+    _nearbyRestaurantsController =
+        Provider.of<NearbyRestaurantsController>(context, listen: false);
     _clientsController = Provider.of<ClientsController>(context, listen: false);
     // _ordersController = Provider.of<OrdersController>(context, listen: false);
-    _clientCountProvider = Provider.of<ClientCountProvider>(context, listen: false);
-    _menuItemsController = Provider.of<MenuItemsController>(context, listen: false);
+    _clientCountProvider =
+        Provider.of<ClientCountProvider>(context, listen: false);
+    _menuItemsController =
+        Provider.of<MenuItemsController>(context, listen: false);
     // _topSellersController =
     //     Provider.of<TopSellersController>(context, listen: false);
 
     if (_authController.user != null) {
-      _nearbyRestaurantsController.fetchNearbyRestaurants(_authController.user!);
+      _nearbyRestaurantsController
+          .fetchNearbyRestaurants(_authController.user!);
       // _nearbyRestaurantsController
       //     .fetchNearbyRestaurantsFromGMaps(_authController.user!);
       _clientsController.fetchClients(_authController.user!);
@@ -65,8 +74,10 @@ class _RMainViewState extends State<RMainView> {
       // _topSellersController.fetchTopSellers();
 
       if (_nearbyRestaurantsController.nearbyRestaurantsList.length < 10) {
-        _nearbyRestaurantsController.fetchAndSaveNearbyRestaurants(_authController.user!);
-        _nearbyRestaurantsController.getRestaurantsWithDiscounts(_authController.user!);
+        _nearbyRestaurantsController
+            .fetchAndSaveNearbyRestaurants(_authController.user!);
+        _nearbyRestaurantsController
+            .getRestaurantsWithDiscounts(_authController.user!);
       }
     }
 
@@ -89,32 +100,59 @@ class _RMainViewState extends State<RMainView> {
                 _navigateToPage(0);
               },
               child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 40.w),
-                child: Image.asset(
-                  'assets/icons/order.png',
-                  color: _index == 0 ? const Color(0xFF2F58CD) : Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 40.w),
+                child: Column(
+                  mainAxisSize: MainAxisSize
+                      .min, // Ensures the column takes minimal vertical space
+                  children: [
+                    Image.asset(
+                      'assets/icons/order.png',
+                      color:
+                          _index == 0 ? const Color(0xFF2F58CD) : Colors.white,
+                    ),
+                    const SizedBox(
+                        height: 8), // Add spacing between icon and text
+                    Text(
+                      'Orders',
+                      style: TextStyle(
+                        color: _index == 0
+                            ? const Color(0xFF2F58CD)
+                            : Colors.white,
+                        fontSize: 12, // Small font size for the text
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            // GestureDetector(
-            //   onTap: () {
-            //     _navigateToPage(1);
-            //   },
-            //   child: Image.asset(
-            //     'assets/icons/orders.png',
-            //     color: _index == 1 ? const Color(0xFF2F58CD) : Colors.white,
-            //   ),
-            // ),
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 _navigateToPage(2);
               },
               child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 40.w),
-                child: Image.asset(
-                  'assets/icons/live.png',
-                  color: _index == 2 ? const Color(0xFF2F58CD) : Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 40.w),
+                child: Column(
+                  mainAxisSize:
+                      MainAxisSize.min, // Ensures minimal vertical space usage
+                  children: [
+                    Image.asset(
+                      'assets/icons/live.png',
+                      color:
+                          _index == 2 ? const Color(0xFF2F58CD) : Colors.white,
+                    ),
+                    const SizedBox(
+                        height: 8), // Add space between icon and text
+                    Text(
+                      'Live',
+                      style: TextStyle(
+                        color: _index == 2
+                            ? const Color(0xFF2F58CD)
+                            : Colors.white,
+                        fontSize: 12, // Small font size for the label
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -124,10 +162,28 @@ class _RMainViewState extends State<RMainView> {
                 _navigateToPage(3);
               },
               child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 40.w),
-                child: Image.asset(
-                  'assets/icons/analysis.png',
-                  color: _index == 3 ? const Color(0xFF2F58CD) : Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 40.w),
+                child: Column(
+                  mainAxisSize:
+                      MainAxisSize.min, // Ensures minimal vertical space usage
+                  children: [
+                    Image.asset(
+                      'assets/icons/analysis.png',
+                      color:
+                          _index == 3 ? const Color(0xFF2F58CD) : Colors.white,
+                    ),
+                    const SizedBox(
+                        height: 8), // Add space between icon and text
+                    Text(
+                      'Analysis',
+                      style: TextStyle(
+                        color: _index == 3
+                            ? const Color(0xFF2F58CD)
+                            : Colors.white,
+                        fontSize: 12, // Small font size for the label
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

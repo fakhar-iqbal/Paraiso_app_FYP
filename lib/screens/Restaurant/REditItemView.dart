@@ -29,6 +29,7 @@ class REditItemView extends StatefulWidget {
 }
 
 class _REditItemViewState extends State<REditItemView> {
+  late String _photo;
   final itemTitleTxt = TextEditingController();
   final itemDetailTxt = TextEditingController();
   final workingHourTxt = TextEditingController();
@@ -37,7 +38,7 @@ class _REditItemViewState extends State<REditItemView> {
   final mPriceController = TextEditingController();
   final lPriceController = TextEditingController();
 
-  String itemDetailItemtxt ="Formule";
+  String itemDetailItemtxt = "Formule";
   bool availability = true,
       lowPrice = false,
       mediumPrice = false,
@@ -59,25 +60,25 @@ class _REditItemViewState extends State<REditItemView> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     final authController = Provider.of<AuthController>(context, listen: false);
-    final addonItemsController = Provider.of<AddOnController>(context, listen: false);
+    final addonItemsController =
+        Provider.of<AddOnController>(context, listen: false);
     addonItemsController.fetchADDON(authController.user!.userId);
     _addons = addonItemsController.addons;
 
-    for(int i = 0; i < widget.product.addOns.length; i++){
-      for(int j = 0; j < _addons.length; j++){
-        if(widget.product.addOns[i] == _addons[j].addonId){
+    for (int i = 0; i < widget.product.addOns.length; i++) {
+      for (int j = 0; j < _addons.length; j++) {
+        if (widget.product.addOns[i] == _addons[j].addonId) {
           _MyItemAddons.add(_addons[j]);
         }
       }
     }
-
   }
 
   Future<void> locationPopup() async {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return StatefulBuilder(builder: (context,setState){
+          return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(22.r),
@@ -102,17 +103,17 @@ class _REditItemViewState extends State<REditItemView> {
                       itemBuilder: (context, index) {
                         return AddOnTile(
                           title: _addons[index].addonName,
-                          subData: "${_addons[index].addonItems.length}${_addons[index].addonType == "Choices" ? " choices" : " ingredients"}",
+                          subData:
+                              "${_addons[index].addonItems.length}${_addons[index].addonType == "Choices" ? " choices" : " ingredients"}",
                           showDeleteButton: false,
                           isChecked: _MyItemAddons.contains(_addons[index]),
                           onTap: () {
-                            if(_MyItemAddons.contains(_addons[index])){
+                            if (_MyItemAddons.contains(_addons[index])) {
                               _MyItemAddons.remove(_addons[index]);
-                            }else{
+                            } else {
                               _MyItemAddons.add(_addons[index]);
                             }
-                            setState(() {
-                            });
+                            setState(() {});
                           },
                         );
                       },
@@ -136,12 +137,11 @@ class _REditItemViewState extends State<REditItemView> {
               ],
             );
           });
-        } );
+        });
   }
-  void changeState(){
-    setState(() {
 
-    });
+  void changeState() {
+    setState(() {});
   }
 
   String? priceValidator(String? value) {
@@ -165,7 +165,7 @@ class _REditItemViewState extends State<REditItemView> {
   @override
   void initState() {
     super.initState();
-
+    _photo = widget.product.photo;
     itemTitleTxt.text = widget.product.name;
     itemDetailTxt.text = widget.product.description;
     workingHourTxt.text = widget.product.workingHrs;
@@ -187,7 +187,7 @@ class _REditItemViewState extends State<REditItemView> {
     counter = widget.product.rewards;
     addOns = widget.product.addOns;
     addons = addOns.map((addon) => Addon(expanded: true)).toList();
-    if(kDebugMode) print(addons);
+    if (kDebugMode) print(addons);
   }
 
   @override
@@ -196,12 +196,29 @@ class _REditItemViewState extends State<REditItemView> {
     final menuController = Provider.of<MenuItemsController>(context);
     final authController = Provider.of<AuthController>(context, listen: false);
 
+    // void selectAnduploadImage() async {
+    //   final imageSource = await ImageSourcePicker.showImageSource(context);
+    //   if (imageSource != null) {
+    //     final file = await ImageSourcePicker.pickFile(imageSource);
+    //     if (file != null) {
+    //       await imageController.uploadImageToFirebase(file);
+    //     }
+    //   }
+    // }
     void selectAnduploadImage() async {
       final imageSource = await ImageSourcePicker.showImageSource(context);
+      print(imageSource);
       if (imageSource != null) {
         final file = await ImageSourcePicker.pickFile(imageSource);
         if (file != null) {
-          await imageController.uploadImageToFirebase(file);
+          final imageUrl = await imageController.uploadImageToFirebase(file);
+          if (imageUrl != null) {
+            setState(() {
+              _photo =
+                  imageUrl; // Update the local state with the new photo URL
+              print("Updated photo URL: $_photo");
+            });
+          }
         }
       }
     }
@@ -273,15 +290,28 @@ class _REditItemViewState extends State<REditItemView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // CircleAvatar(
+                  //   radius: 80.0,
+                  //   backgroundColor: Colors.grey.shade700,
+                  //   backgroundImage: widget.product.photo != ""
+                  //       ? NetworkImage(widget.product.photo)
+                  //       : null,
+                  //   child: InkWell(
+                  //     onTap: selectAnduploadImage,
+                  //   ),
+                  // ),
                   CircleAvatar(
                     radius: 80.0,
                     backgroundColor: Colors.grey.shade700,
-                    backgroundImage: widget.product.photo != ""
+                    backgroundImage: widget.product.photo.isNotEmpty
                         ? NetworkImage(widget.product.photo)
                         : null,
-                    child: InkWell(
-                      onTap: selectAnduploadImage,
-                    ),
+                    child: widget.product.photo.isEmpty
+                        ? InkWell(
+                            onTap: selectAnduploadImage,
+                            child: Icon(Icons.add_a_photo, color: Colors.white),
+                          )
+                        : null,
                   ),
                 ],
               ),
@@ -359,31 +389,32 @@ class _REditItemViewState extends State<REditItemView> {
               SizedBox(
                 height: 10.h,
               ),
-
               SizedBox(
                 height: 10.h,
               ),
               Row(
                 children: [
-                  Text("Ajouter Addon:", style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 23.sp),),
+                  Text(
+                    "Ajouter Addon:",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 23.sp),
+                  ),
                   const Spacer(),
                   GestureDetector(
-                    onTap: () async{
+                    onTap: () async {
                       await locationPopup();
-                      setState(() {
-
-                      });
+                      setState(() {});
                     },
                     child: Container(
                       height: 40.h,
                       width: 60.w,
                       margin: EdgeInsets.only(right: 5.w),
-                      decoration:  BoxDecoration(
+                      decoration: BoxDecoration(
                           color: const Color(0xFF2F58CD),
-                          borderRadius: BorderRadius.all(Radius.circular(10.r))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.r))),
                       child: Center(
                         child: Icon(
                           Icons.add,
@@ -396,19 +427,18 @@ class _REditItemViewState extends State<REditItemView> {
                 ],
               ),
               SizedBox(
-                height: 95.h* _MyItemAddons.length,
+                height: 95.h * _MyItemAddons.length,
                 width: 380.w,
                 child: ListView.builder(
                   itemCount: _MyItemAddons.length,
                   itemBuilder: (context, index) {
                     return AddOnTile(
                       title: _MyItemAddons[index].addonName,
-                      subData: "${_MyItemAddons[index].addonItems.length}${_MyItemAddons[index].addonType == "Choices" ? " choices" : " ingredients"}",
-                      onDelete: (){
+                      subData:
+                          "${_MyItemAddons[index].addonItems.length}${_MyItemAddons[index].addonType == "Choices" ? " choices" : " ingredients"}",
+                      onDelete: () {
                         _MyItemAddons.remove(_MyItemAddons[index]);
-                        setState(() {
-
-                        });
+                        setState(() {});
                       },
                     );
                   },
@@ -515,7 +545,7 @@ class _REditItemViewState extends State<REditItemView> {
                 height: 40.h,
               ),
               Text(
-               AppLocalizations.of(context)!.selectPrice,
+                AppLocalizations.of(context)!.selectPrice,
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w400,
@@ -810,8 +840,8 @@ class _REditItemViewState extends State<REditItemView> {
                             prepDelay: prepareDelayTxt.text,
                             rewards: counter,
                             free: widget.product.free,
-                            addOns: _MyItemAddons.map((e) => e.addonId).toList()
-                        );
+                            addOns:
+                                _MyItemAddons.map((e) => e.addonId).toList());
                         await menuController.updateItem(
                             authController.user!, item);
                       }

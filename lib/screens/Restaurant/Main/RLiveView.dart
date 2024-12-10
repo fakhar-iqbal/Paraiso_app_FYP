@@ -217,7 +217,7 @@ class _RLiveViewState extends State<RLiveView> {
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
                     decoration: BoxDecoration(
-                      color: Color(0xFF2A2A2A),
+                      color: const Color(0xFF2A2A2A),
                       borderRadius: BorderRadius.circular(22.r),
                       border: Border.all(
                         color: Color(0xFFF3EEDD),

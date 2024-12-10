@@ -229,6 +229,7 @@ import 'package:go_router/go_router.dart';
 import 'package:paraiso/controllers/customer_controller.dart';
 import 'package:paraiso/screens/camera_screen.dart';
 import 'package:paraiso/screens/chatbot.dart';
+import 'package:paraiso/screens/myOrders_Screen.dart';
 import 'package:paraiso/screens/route_ordering_screen.dart';
 import 'package:paraiso/screens/user_profile.dart';
 import 'package:paraiso/widgets/home_chips_row.dart';
@@ -305,6 +306,7 @@ class _ScaffoldWithNavState extends State<ScaffoldWithNav> {
     return Scaffold(
       key: _customerScaffoldKey,
       drawer: Drawer(
+        backgroundColor: Colors.black,
         width: 250.w,
         child: ListView(
           padding: EdgeInsets.zero,
@@ -358,10 +360,29 @@ class _ScaffoldWithNavState extends State<ScaffoldWithNav> {
               ),
               onTap: () {
                 _closeDrawer();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MyOrdersScreen()));
               },
             ),
             SharedPreferencesHelper.getCustomerType() == 'guest'
-                ? SizedBox()
+                ? ListTile(
+                    leading:
+                        const Icon(Icons.logout_outlined, color: Colors.white),
+                    title: Text(
+                      'Exit App',
+                    ),
+                    onTap: () async {
+                      _closeDrawer();
+                      
+                      
+                      if (mounted) {
+                        context
+                            .pushReplacement(AppRouteConstants.getStartedRoute);
+                      }
+                    },
+                  )
                 : ListTile(
                     leading:
                         const Icon(Icons.logout_outlined, color: Colors.white),

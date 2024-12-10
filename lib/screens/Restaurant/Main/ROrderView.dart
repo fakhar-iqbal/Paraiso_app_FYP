@@ -227,9 +227,7 @@ class _ROrderViewState extends State<ROrderView> {
                                                   radius: 40.r,
                                                   backgroundColor:
                                                       Colors.white54,
-                                                  backgroundImage: NetworkImage(
-                                                      inProgressOrders[index]
-                                                          .photo),
+                                                  backgroundImage: NetworkImage('https://thumbs.dreamstime.com/z/linear-flat-line-art-style-time-money-business-concept-hourglass-moneybags-rising-dollar-bag-plant-vector-illustration-107735520.jpg'),
                                                 ),
                                                 SizedBox(
                                                   width: 15.w,
@@ -490,9 +488,7 @@ class _ROrderViewState extends State<ROrderView> {
                                                   radius: 40.r,
                                                   backgroundColor:
                                                       Colors.white54,
-                                                  backgroundImage: NetworkImage(
-                                                      fulfilledOrders[index]
-                                                          .photo),
+                                                  backgroundImage: NetworkImage('https://th.bing.com/th/id/OIP.kpYvlS39ImvtWy4qdigAaQHaH4?rs=1&pid=ImgDetMain'),
                                                 ),
                                                 SizedBox(
                                                   width: 15.w,

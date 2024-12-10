@@ -75,7 +75,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   child: ListView.builder(
                       itemCount: items.length,
                       itemBuilder: (context, index) => MyOrderTile(
-                            restaurantImage: items[index]['photo'],
+                            restaurantImage: 'https://th.bing.com/th/id/R.adb765cbe2c4a250ec8dddb4c1e635ad?rik=mwK83sntzxKILA&pid=ImgRaw&r=0',
                             orderDate: items[index]['time'] ?? "",
                             orderId: items[index]['orderId'].toString().substring(0, 12),
                             orderNumber: (index + 1).toString(),

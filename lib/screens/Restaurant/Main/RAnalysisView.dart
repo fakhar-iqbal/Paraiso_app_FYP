@@ -125,32 +125,32 @@ class _RAnalysisViewState extends State<RAnalysisView> {
                         AppLocalizations.of(context)!.analysisTitle,
                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 23.sp),
                       ),
-                      DropdownButton(
-                          // items: [AppLocalizations.of(context)!.all,AppLocalizations.of(context)!.today, AppLocalizations.of(context)!.weekly, AppLocalizations.of(context)!.monthly]
-                          //     .map((e) => DropdownMenuItem(
-                          //           value: e,
-                          //           child: Text(e),
-                          //         ))
-                          //     .toList(),
-                          items: ["Tout","Aujourd'hui", "Hebdomadaire", "Mensuel"]
-                              .map((e) => DropdownMenuItem(
-                            value: e,
-                            child: Text(e),
-                          ))
-                              .toList(),
-                          value: inProgress,
-                          style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400),
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            size: 20.sp,
-                          ),
-                          padding: EdgeInsets.zero,
-                          underline: Container(),
-                          onChanged: (val) {
-                            setState(() {
-                              inProgress = val!;
-                            });
-                          })
+                      // DropdownButton(
+                      //     // items: [AppLocalizations.of(context)!.all,AppLocalizations.of(context)!.today, AppLocalizations.of(context)!.weekly, AppLocalizations.of(context)!.monthly]
+                      //     //     .map((e) => DropdownMenuItem(
+                      //     //           value: e,
+                      //     //           child: Text(e),
+                      //     //         ))
+                      //     //     .toList(),
+                      //     items: ["Tout","Aujourd'hui", "Hebdomadaire", "Mensuel"]
+                      //         .map((e) => DropdownMenuItem(
+                      //       value: e,
+                      //       child: Text(e),
+                      //     ))
+                      //         .toList(),
+                      //     value: inProgress,
+                      //     style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400),
+                      //     icon: Icon(
+                      //       Icons.keyboard_arrow_down,
+                      //       size: 20.sp,
+                      //     ),
+                      //     padding: EdgeInsets.zero,
+                      //     underline: Container(),
+                      //     onChanged: (val) {
+                      //       setState(() {
+                      //         inProgress = val!;
+                      //       });
+                      //     })
                     ],
                   ),
                   SizedBox(
@@ -193,12 +193,12 @@ class _RAnalysisViewState extends State<RAnalysisView> {
                   ),
                   Row(
                     children: [
-                      Expanded(
-                        child: _analysisBox(AppLocalizations.of(context)!.conversionsLabel, _clientsCountProvider.clientCount.toString()),
-                      ),
-                      SizedBox(
-                        width: 20.w,
-                      ),
+                      // Expanded(
+                      //   child: _analysisBox(AppLocalizations.of(context)!.conversionsLabel, _clientsCountProvider.clientCount.toString()),
+                      // ),
+                      // SizedBox(
+                      //   width: 20.w,
+                      // ),
                       Expanded(
                         child: _analysisBox(AppLocalizations.of(context)!.newCustomerLabel, _clientsCountProvider.clientCount.toString()),
                       ),

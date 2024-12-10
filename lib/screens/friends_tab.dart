@@ -121,61 +121,61 @@ class _FriendsTabState extends State<FriendsTab> {
               ),
             ),
             10.verticalSpace,
-            Container(
-              margin: EdgeInsets.fromLTRB(25.w, 0.h, 25.w, 0.h),
-              padding: EdgeInsets.symmetric(horizontal: 33.w, vertical: 15.h),
-              width: 380.w,
-              decoration: BoxDecoration(
-                color: Color(0xFF2A2A2A),
-                borderRadius: BorderRadius.circular(22.r),
-                border: Border.all(
-                  color: Color(0xFFF3EEDD),
-                  width: 1.w,
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(
-                    Icons.link,
-                    color: const Color(0xFFBDBDBD),
-                    size: 35.sp,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      final Uri url = Uri.parse(
-                          'https://www.getparaiso.com/f/2ba798fe-db6f-4e40-9c69-0295552961ec');
-                      Future<void> _launchUrl() async {
-                        if (!await launchUrl(url)) {
-                          throw Exception('Could not launch $url');
-                        }
-                      }
+            // Container(
+            //   margin: EdgeInsets.fromLTRB(25.w, 0.h, 25.w, 0.h),
+            //   padding: EdgeInsets.symmetric(horizontal: 33.w, vertical: 15.h),
+            //   width: 380.w,
+            //   decoration: BoxDecoration(
+            //     color: Color(0xFF2A2A2A),
+            //     borderRadius: BorderRadius.circular(22.r),
+            //     border: Border.all(
+            //       color: Color(0xFFF3EEDD),
+            //       width: 1.w,
+            //     ),
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Icon(
+            //         Icons.link,
+            //         color: const Color(0xFFBDBDBD),
+            //         size: 35.sp,
+            //       ),
+            //       GestureDetector(
+            //         onTap: () {
+            //           final Uri url = Uri.parse(
+            //               'https://www.getparaiso.com/f/2ba798fe-db6f-4e40-9c69-0295552961ec');
+            //           Future<void> _launchUrl() async {
+            //             if (!await launchUrl(url)) {
+            //               throw Exception('Could not launch $url');
+            //             }
+            //           }
 
-                      _launchUrl();
-                    },
-                    child: Row(
-                      children: [
-                        Text(
-                          "Programme de parrainage",
-                          style: TextStyle(
-                            color: const Color(0xFFBDBDBD),
-                            fontSize: 19.sp,
-                            fontFamily: 'Recoleta',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        14.horizontalSpace,
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: softGray,
-                          size: 25.sp,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            //           _launchUrl();
+            //         },
+            //         child: Row(
+            //           children: [
+            //             Text(
+            //               "Programme de parrainage",
+            //               style: TextStyle(
+            //                 color: const Color(0xFFBDBDBD),
+            //                 fontSize: 19.sp,
+            //                 fontFamily: 'Recoleta',
+            //                 fontWeight: FontWeight.w400,
+            //               ),
+            //             ),
+            //             14.horizontalSpace,
+            //             Icon(
+            //               Icons.arrow_forward_ios,
+            //               color: softGray,
+            //               size: 25.sp,
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             20.verticalSpace,
 
             //friends list

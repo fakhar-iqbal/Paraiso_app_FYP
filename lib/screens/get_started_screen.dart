@@ -89,6 +89,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(height: 50,),
             Image.asset(
               'assets/images/paraiso_logo.png',
               height: 126.h,
@@ -105,7 +106,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                     fontWeight: FontWeight.w400,
                   ),
             ),
-            37.verticalSpace,
+            10.verticalSpace,
             // SizedBox(
             //   width: 270.w,
             //   child: AutoSizeText(
@@ -120,33 +121,33 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
             SizedBox(
               height: MediaQuery.sizeOf(context).height * .1,
             ),
-            PrimaryButton(
-              onPressed: () async {
-                // context.push(AppRouteConstants.loginRoute);
+            // PrimaryButton(
+            //   onPressed: () async {
+            //     // context.push(AppRouteConstants.loginRoute);
 
-                SharedPreferencesHelper.saveCustomerType("guest");
-                await FirebaseMessaging.instance.getToken().then((val) {
-                  SharedPreferencesHelper.saveCustomerEmail(val.toString());
-                  context.go(AppRouteConstants.homeRoute);
-                  print('SharedPreferencesHelper.getCustomerType()');
-                  print(SharedPreferencesHelper.getCustomerType());
-                  print(SharedPreferencesHelper.getCustomerType());
-                });
-              },
-              icon: Icons.arrow_forward_ios_outlined,
-              enabled: true,
-              child: AutoSizeText(
-                "Continues Guest",
-                style: TextStyle(
-                  color: const Color(0xFFE4E4E4),
-                  fontSize: 18.sp,
-                  fontFamily: 'Recoleta',
-                  fontWeight: FontWeight.w700,
-                ),
-                maxLines: 1,
-              ),
-            ),
-            20.verticalSpace,
+            //     SharedPreferencesHelper.saveCustomerType("guest");
+            //     await FirebaseMessaging.instance.getToken().then((val) {
+            //       SharedPreferencesHelper.saveCustomerEmail(val.toString());
+            //       context.go(AppRouteConstants.homeRoute);
+            //       print('SharedPreferencesHelper.getCustomerType()');
+            //       print(SharedPreferencesHelper.getCustomerType());
+            //       print(SharedPreferencesHelper.getCustomerType());
+            //     });
+            //   },
+            //   icon: Icons.arrow_forward_ios_outlined,
+            //   enabled: true,
+            //   child: AutoSizeText(
+            //     "Continues Guest",
+            //     style: TextStyle(
+            //       color: const Color(0xFFE4E4E4),
+            //       fontSize: 18.sp,
+            //       fontFamily: 'Recoleta',
+            //       fontWeight: FontWeight.w700,
+            //     ),
+            //     maxLines: 1,
+            //   ),
+            // ),
+            // 20.verticalSpace,
             PrimaryButton(
               onPressed: () async {
                 context.push(AppRouteConstants.loginRoute);
